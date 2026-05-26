@@ -1,4 +1,4 @@
-# 📝 TODO-LIST
+# TODO-LIST
 
 Aplikasi manajemen tugas berbasis web yang dibangun dengan **Laravel**. Dilengkapi fitur deadline, statistik, dan pengaturan personal.
 
