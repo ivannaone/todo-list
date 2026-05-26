@@ -90,4 +90,16 @@ Akses di browser: [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## Struktur Direktori
+## 📸 Screenshots
+
+### Semua Tugas
+![Semua Tugas](screenshots/semua_tugas.png)
+
+### Dashboard
+![Dashboard](screenshots/tasks.png)
+
+### Statistik
+![Statistik](screenshots/statistic.png)
+
+### Settings
+![Settings](screenshots/settings.png)
