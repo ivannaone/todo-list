@@ -4,7 +4,7 @@ Aplikasi manajemen tugas berbasis web yang dibangun dengan **Laravel**. Dilengka
 
 ---
 
-## ✨ Fitur
+## Fitur
 
 - **Manajemen Tugas** — Tambah, edit, hapus, dan tandai tugas sebagai selesai
 - **Deadline** — Pantau tugas-tugas yang mendekati atau melewati batas waktu
@@ -13,7 +13,7 @@ Aplikasi manajemen tugas berbasis web yang dibangun dengan **Laravel**. Dilengka
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework:** Laravel (PHP)
 - **Frontend:** Blade Template Engine
@@ -21,7 +21,7 @@ Aplikasi manajemen tugas berbasis web yang dibangun dengan **Laravel**. Dilengka
 
 ---
 
-## ⚙️ Instalasi
+## Instalasi
 
 ### 1. Clone Repository
 
@@ -71,7 +71,7 @@ Akses di browser: [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## 🗺️ Routes
+## Routes
 
 | Method | URL | Deskripsi |
 |--------|-----|-----------|
@@ -90,4 +90,4 @@ Akses di browser: [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## 📁 Struktur Direktori
+## Struktur Direktori
