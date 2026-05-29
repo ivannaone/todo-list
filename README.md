@@ -93,13 +93,13 @@ Akses di browser: [http://localhost:8000](http://localhost:8000)
 ## Screenshots
 
 ### Semua Tugas
-![Semua Tugas](./assets/screenshots/semua_tugas.png)
+![Semua Tugas](./screenshots/semua_tugas.png)
 
 ### Dashboard
-![Dashboard](./assets/screenshots/dashboard.png)
+![Dashboard](./screenshots/dashboard.png)
 
 ### Statistik
-![Statistik](./assets/screenshots/statistik.png)
+![Statistik](./screenshots/statistik.png)
 
 ### Settings
-![Settings](./assets/screenshots/settings.png)
+![Settings](./screenshots/settings.png)
