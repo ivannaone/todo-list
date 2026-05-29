@@ -1,103 +1,106 @@
-<!DOCTYPE html>
-<html>
-<head>
+@extends('layout.app')
 
-    <title>Edit Tugas</title>
+@section('title', 'Edit Tugas — TaskFlow')
+@section('page-title', 'Edit Tugas')
+@section('page-subtitle', 'Perbarui informasi tugas')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('topbar-actions')
+    <a href="/tasks" class="btn btn-outline-secondary">
+        <i class="fa-solid fa-arrow-left me-1"></i> Kembali
+    </a>
+@endsection
 
-    @php
-        $theme = session('theme', 'light');
-    @endphp
+@section('content')
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body p-4">
+                <form action="/tasks/{{ $task->id }}" method="POST">
+                    @csrf
+                    @method('PUT')
 
-    <style>
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="fa-solid fa-heading me-1" style="color:#6366f1;"></i>
+                            Judul Tugas <span class="text-danger">*</span>
+                        </label>
+                        <input type="text"
+                               name="title"
+                               class="form-control @error('title') is-invalid @enderror"
+                               value="{{ old('title', $task->title) }}"
+                               autofocus>
+                        @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-        body{
-            background-color: {{ $theme == 'dark' ? '#1e1e1e' : 'white' }};
-            color: {{ $theme == 'dark' ? 'white' : 'black' }};
-        }
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="fa-solid fa-align-left me-1" style="color:#6366f1;"></i>
+                            Deskripsi
+                        </label>
+                        <textarea name="description"
+                                  class="form-control @error('description') is-invalid @enderror"
+                                  rows="4">{{ old('description', $task->description) }}</textarea>
+                        @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-        .form-control,
-        textarea{
-            background-color: {{ $theme == 'dark' ? '#2d2d2d' : 'white' }};
-            color: {{ $theme == 'dark' ? 'white' : 'black' }};
-            border-color: #666;
-        }
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fa-regular fa-calendar me-1" style="color:#6366f1;"></i>
+                                Deadline
+                            </label>
+                            <input type="date"
+                                   name="deadline"
+                                   class="form-control @error('deadline') is-invalid @enderror"
+                                   value="{{ old('deadline', $task->deadline) }}">
+                            @error('deadline')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-        .form-check-input{
-            background-color: {{ $theme == 'dark' ? '#2d2d2d' : 'white' }};
-            border-color: #666;
-        }
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fa-solid fa-flag me-1" style="color:#6366f1;"></i>
+                                Prioritas <span class="text-danger">*</span>
+                            </label>
+                            <select name="priority" class="form-select @error('priority') is-invalid @enderror">
+                                <option value="low"    {{ old('priority', $task->priority) == 'low'    ? 'selected' : '' }}>🟢 Rendah</option>
+                                <option value="medium" {{ old('priority', $task->priority) == 'medium' ? 'selected' : '' }}>🟡 Sedang</option>
+                                <option value="high"   {{ old('priority', $task->priority) == 'high'   ? 'selected' : '' }}>🔴 Tinggi</option>
+                            </select>
+                            @error('priority')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
 
-    </style>
+                    <div class="mb-4">
+                        <div class="form-check" style="padding:14px 16px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:10px;">
+                            <input type="checkbox"
+                                   name="is_done"
+                                   class="form-check-input"
+                                   id="isDone"
+                                   {{ $task->is_done ? 'checked' : '' }}>
+                            <label class="form-check-label fw-semibold" for="isDone" style="font-size:14px;">
+                                <i class="fa-solid fa-circle-check me-1" style="color:#10b981;"></i>
+                                Tandai sebagai selesai
+                            </label>
+                        </div>
+                    </div>
 
-</head>
-<body>
-
-<div class="container mt-5">
-
-    <h2>Edit Tugas</h2>
-
-    <form action="/tasks/{{ $task->id }}" method="POST">
-
-        @csrf
-        @method('PUT')
-
-        <div class="mb-3">
-
-            <label>Judul</label>
-
-            <input type="text"
-                name="title"
-                class="form-control"
-                value="{{ $task->title }}">
-
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success flex-grow-1">
+                            <i class="fa-solid fa-floppy-disk me-1"></i> Simpan Perubahan
+                        </button>
+                        <a href="/tasks" class="btn btn-outline-secondary">Batal</a>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div class="mb-3">
-
-            <label>Deskripsi</label>
-
-            <textarea name="description"
-                class="form-control">{{ $task->description }}</textarea>
-
-        </div>
-
-        <div class="mb-3">
-
-            <label>Deadline</label>
-
-            <input type="date"
-                name="deadline"
-                class="form-control"
-                value="{{ $task->deadline }}">
-
-        </div>
-
-        <div class="form-check mb-3">
-
-            <input type="checkbox"
-                name="is_done"
-                class="form-check-input"
-                {{ $task->is_done ? 'checked' : '' }}>
-
-            <label class="form-check-label">
-
-                Selesai
-
-            </label>
-
-        </div>
-
-        <button class="btn btn-success">
-
-            Update
-
-        </button>
-
-    </form>
-
+    </div>
 </div>
-
-</body>
-</html>
+@endsection

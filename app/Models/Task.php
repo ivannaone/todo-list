@@ -10,6 +10,7 @@ class Task extends Model
         'title',
         'description',
         'deadline',
-        'is_done'
+        'is_done',
+        'priority',
     ];
 }
