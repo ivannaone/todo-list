@@ -96,10 +96,10 @@ Akses di browser: [http://localhost:8000](http://localhost:8000)
 ![Semua Tugas](./screenshots/semua_tugas.png)
 
 ### Dashboard
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](./screenshots/tasks.png)
 
 ### Statistik
-![Statistik](./screenshots/statistik.png)
+![Statistik](./screenshots/statistic.png)
 
 ### Settings
 ![Settings](./screenshots/settings.png)
