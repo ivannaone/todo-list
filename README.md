@@ -1,105 +1,105 @@
-# TODO-LIST
+# TaskFlow — Modern To-Do List App
 
-Aplikasi manajemen tugas berbasis web yang dibangun dengan **Laravel**. Dilengkapi fitur deadline, statistik, dan pengaturan personal.
-
----
-
-## Fitur
-
-- **Manajemen Tugas** — Tambah, edit, hapus, dan tandai tugas sebagai selesai
-- **Deadline** — Pantau tugas-tugas yang mendekati atau melewati batas waktu
-- **Statistik** — Lihat ringkasan progress tugas secara visual
-- **Pengaturan** — Kustomisasi preferensi aplikasi
+Aplikasi manajemen tugas berbasis web yang dibangun dengan **Laravel 11** dan **Bootstrap 5**. Dirancang dengan tampilan modern, mendukung dark/light mode, dan dilengkapi fitur analitik tugas.
 
 ---
 
-## Tech Stack
+## ✨ Fitur Utama
 
-- **Framework:** Laravel (PHP)
-- **Frontend:** Blade Template Engine
-- **Database:** MySQL / SQLite
+- **Manajemen Tugas** — Tambah, edit, hapus, dan tandai tugas selesai
+- **Prioritas Tugas** — Tinggi 🔴, Sedang 🟡, Rendah 🟢
+- **Filter & Pencarian** — Filter berdasarkan status dan prioritas secara real-time
+- **Dashboard Analitik** — Donut chart progress, deadline hari ini, aktivitas terbaru
+- **Statistik** — Bar chart distribusi status, tingkat penyelesaian per prioritas
+- **Deadline Tracker** — Pantau tugas yang melewati batas waktu
+- **Dark / Light Mode** — Tema tersimpan di session
+- **Responsive** — Sidebar di desktop, bottom navigation di mobile
 
 ---
 
-## Instalasi
+## 📸 Screenshots
 
-### 1. Clone Repository
+### Semua Tugas
+![Semua Tugas](screenshots/semua_tugas%20(2).png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Statistik
+![Statistik](screenshots/statistik.png)
+
+### Deadline
+![Deadline](screenshots/deadline%20(2).png)
+
+### Pengaturan
+![Pengaturan](screenshots/pengaturan.png)
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Teknologi |
+|-------|-----------|
+| Backend | Laravel 11 (PHP 8.2+) |
+| Frontend | Bootstrap 5.3, Font Awesome 6.5 |
+| Chart | Chart.js 4.4 |
+| Database | SQLite / MySQL |
+| Font | Inter (Google Fonts) |
+
+---
+
+## 🚀 Instalasi
+
+### 1. Clone repository
 
 ```bash
 git clone https://github.com/username/todo-list.git
 cd todo-list
 ```
 
-### 2. Install Dependencies
+### 2. Install dependencies
 
 ```bash
 composer install
-npm install && npm run build
 ```
 
-### 3. Konfigurasi Environment
+### 3. Konfigurasi environment
 
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-Edit file `.env` sesuai konfigurasi database kamu:
+### 4. Setup database
 
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=todo_list
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-### 4. Migrasi Database
+Edit `.env` sesuai konfigurasi database kamu, lalu jalankan:
 
 ```bash
 php artisan migrate
 ```
 
-### 5. Jalankan Aplikasi
+### 5. Jalankan aplikasi
 
 ```bash
 php artisan serve
 ```
 
-Akses di browser: [http://localhost:8000](http://localhost:8000)
+Buka browser dan akses `http://localhost:8000`
 
 ---
 
-## Routes
+## 📁 Struktur Halaman
 
-| Method | URL | Deskripsi |
-|--------|-----|-----------|
-| GET | `/` | Redirect ke `/tasks` |
-| GET | `/tasks` | Daftar semua tugas |
-| GET | `/tasks/create` | Form tambah tugas |
-| POST | `/tasks` | Simpan tugas baru |
-| GET | `/tasks/{id}/edit` | Form edit tugas |
-| PUT/PATCH | `/tasks/{id}` | Update tugas |
-| DELETE | `/tasks/{id}` | Hapus tugas |
-| GET | `/dashboard` | Dashboard utama |
-| GET | `/deadline` | Tugas dengan deadline |
-| GET | `/statistics` | Statistik tugas |
-| GET | `/settings` | Halaman pengaturan |
-| POST | `/settings/save` | Simpan pengaturan |
+| Route | Halaman | Deskripsi |
+|-------|---------|-----------|
+| `/tasks` | Semua Tugas | Daftar semua tugas dengan filter & search |
+| `/dashboard` | Dashboard | Ringkasan statistik & aktivitas terbaru |
+| `/statistics` | Statistik | Analitik visual penyelesaian tugas |
+| `/deadline` | Deadline | Tugas yang melewati batas waktu |
+| `/settings` | Pengaturan | Profil pengguna & tema tampilan |
 
 ---
 
-## Screenshots
+## 📝 Lisensi
 
-### Semua Tugas
-![Semua Tugas](./screenshots/semua_tugas.png)
-
-### Dashboard
-![Tasks](./screenshots/tasks.png)
-
-### Statistik
-![Statistik](./screenshots/statistic.png)
-
-### Settings
-![Settings](./screenshots/settings.png)
+MIT License — bebas digunakan dan dimodifikasi.
