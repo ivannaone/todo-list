@@ -1,19 +1,21 @@
 # TaskFlow — Modern To-Do List App
 
-Aplikasi manajemen tugas berbasis web yang dibangun dengan **Laravel 11** dan **Bootstrap 5**. Dirancang dengan tampilan modern, mendukung dark/light mode, dan dilengkapi fitur analitik tugas.
+> Aplikasi manajemen tugas berbasis web yang dibangun dengan **Laravel 11** dan **Bootstrap 5**. Tampilan modern, mendukung dark/light mode, dan dilengkapi fitur analitik tugas.
 
 ---
 
 ## ✨ Fitur Utama
 
-- **Manajemen Tugas** — Tambah, edit, hapus, dan tandai tugas selesai
-- **Prioritas Tugas** — Tinggi 🔴, Sedang 🟡, Rendah 🟢
-- **Filter & Pencarian** — Filter berdasarkan status dan prioritas secara real-time
-- **Dashboard Analitik** — Donut chart progress, deadline hari ini, aktivitas terbaru
-- **Statistik** — Bar chart distribusi status, tingkat penyelesaian per prioritas
-- **Deadline Tracker** — Pantau tugas yang melewati batas waktu
-- **Dark / Light Mode** — Tema tersimpan di session
-- **Responsive** — Sidebar di desktop, bottom navigation di mobile
+- **Manajemen Tugas** — Tambah, edit, hapus, dan tandai tugas selesai langsung dari daftar
+- **Prioritas Tugas** — Tinggi 🔴, Sedang 🟡, Rendah 🟢 dengan indikator warna
+- **Filter & Pencarian** — Filter berdasarkan status dan prioritas secara real-time tanpa reload
+- **Dashboard Analitik** — Donut chart progress, deadline hari ini, dan aktivitas terbaru
+- **Statistik Visual** — Bar chart distribusi status, tingkat penyelesaian per prioritas
+- **Deadline Tracker** — Pantau tugas yang melewati batas waktu beserta hitungan hari keterlambatan
+- **Dark / Light Mode** — Tema tersimpan di session, berlaku di seluruh halaman
+- **Responsive Design** — Sidebar di desktop, bottom navigation di mobile
+- **Konfirmasi Hapus** — Modal konfirmasi sebelum menghapus tugas
+- **Validasi Form** — Validasi input dengan pesan error yang informatif
 
 ---
 
@@ -45,40 +47,89 @@ Aplikasi manajemen tugas berbasis web yang dibangun dengan **Laravel 11** dan **
 | Chart | Chart.js 4.4 |
 | Database | SQLite / MySQL |
 | Font | Inter (Google Fonts) |
+| Icons | Font Awesome 6.5 |
+
+---
+
+## 📁 Struktur Proyek
+
+```
+todo-list/
+├── app/
+│   ├── Http/Controllers/
+│   │   └── TaskController.php   # Controller utama semua fitur task
+│   └── Models/
+│       └── Task.php             # Model task dengan fillable fields
+├── database/
+│   └── migrations/              # Migration tabel tasks + priority
+├── resources/views/
+│   ├── layout/
+│   │   └── app.blade.php        # Shared layout dengan sidebar & bottom nav
+│   └── tasks/
+│       ├── index.blade.php      # Halaman semua tugas
+│       ├── create.blade.php     # Form tambah tugas
+│       ├── edit.blade.php       # Form edit tugas
+│       ├── dashboard.blade.php  # Dashboard & statistik ringkas
+│       ├── statistics.blade.php # Statistik detail dengan chart
+│       ├── deadline.blade.php   # Daftar tugas terlambat
+│       └── settings.blade.php  # Pengaturan profil & tema
+└── routes/
+    └── web.php                  # Definisi semua route aplikasi
+```
 
 ---
 
 ## 🚀 Instalasi
 
-### 1. Clone repository
+### Prasyarat
+
+- PHP >= 8.2
+- Composer
+- SQLite atau MySQL
+
+### Langkah Instalasi
+
+**1. Clone repository**
 
 ```bash
 git clone https://github.com/username/todo-list.git
 cd todo-list
 ```
 
-### 2. Install dependencies
+**2. Install dependencies PHP**
 
 ```bash
 composer install
 ```
 
-### 3. Konfigurasi environment
+**3. Konfigurasi environment**
 
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-### 4. Setup database
+**4. Setup database**
 
-Edit `.env` sesuai konfigurasi database kamu, lalu jalankan:
+Edit file `.env` sesuai konfigurasi database kamu:
+
+```env
+DB_CONNECTION=sqlite
+# atau untuk MySQL:
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_DATABASE=todo_list
+# DB_USERNAME=root
+# DB_PASSWORD=
+```
+
+**5. Jalankan migration**
 
 ```bash
 php artisan migrate
 ```
 
-### 5. Jalankan aplikasi
+**6. Jalankan server**
 
 ```bash
 php artisan serve
@@ -88,15 +139,39 @@ Buka browser dan akses `http://localhost:8000`
 
 ---
 
-## 📁 Struktur Halaman
+## � Struktur Halaman & Route
 
-| Route | Halaman | Deskripsi |
-|-------|---------|-----------|
-| `/tasks` | Semua Tugas | Daftar semua tugas dengan filter & search |
-| `/dashboard` | Dashboard | Ringkasan statistik & aktivitas terbaru |
-| `/statistics` | Statistik | Analitik visual penyelesaian tugas |
-| `/deadline` | Deadline | Tugas yang melewati batas waktu |
-| `/settings` | Pengaturan | Profil pengguna & tema tampilan |
+| Method | Route | Halaman | Deskripsi |
+|--------|-------|---------|-----------|
+| GET | `/tasks` | Semua Tugas | Daftar semua tugas dengan filter & search |
+| GET | `/tasks/create` | Tambah Tugas | Form tambah tugas baru |
+| POST | `/tasks` | — | Simpan tugas baru |
+| GET | `/tasks/{id}/edit` | Edit Tugas | Form edit tugas |
+| PUT | `/tasks/{id}` | — | Update tugas |
+| DELETE | `/tasks/{id}` | — | Hapus tugas |
+| POST | `/tasks/{id}/toggle` | — | Toggle status selesai |
+| GET | `/dashboard` | Dashboard | Ringkasan & aktivitas terbaru |
+| GET | `/statistics` | Statistik | Analitik visual penyelesaian tugas |
+| GET | `/deadline` | Deadline | Tugas yang melewati batas waktu |
+| GET | `/settings` | Pengaturan | Profil pengguna & tema tampilan |
+| POST | `/settings/save` | — | Simpan pengaturan |
+
+---
+
+## 🗄️ Struktur Database
+
+### Tabel `tasks`
+
+| Kolom | Tipe | Keterangan |
+|-------|------|------------|
+| id | bigint | Primary key |
+| title | varchar | Judul tugas (wajib, min 3 karakter) |
+| description | text | Deskripsi tugas (opsional) |
+| deadline | date | Batas waktu (opsional) |
+| is_done | boolean | Status selesai (default: false) |
+| priority | enum | Prioritas: low / medium / high |
+| created_at | timestamp | Waktu dibuat |
+| updated_at | timestamp | Waktu diperbarui |
 
 ---
 
