@@ -172,9 +172,3 @@ Buka browser dan akses `http://localhost:8000`
 | priority | enum | Prioritas: low / medium / high |
 | created_at | timestamp | Waktu dibuat |
 | updated_at | timestamp | Waktu diperbarui |
-
----
-
-## 📝 Lisensi
-
-MIT License — bebas digunakan dan dimodifikasi.
